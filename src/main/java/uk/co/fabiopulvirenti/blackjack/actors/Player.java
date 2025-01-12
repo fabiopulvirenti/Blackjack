@@ -124,7 +124,7 @@ public class Player {
     public void hitCard(Card card) {
         cardsList.add(card);
 
-        this.score=this.valueHand();
+        this.score = this.valueHand();
     }
 
     /**
@@ -134,6 +134,34 @@ public class Player {
      */
     public int getScore() {
         return score;
+
+    }
+
+
+    /**
+     * It checks if the current hand is valid.
+     * @return true if valid, false otherwise
+     */
+    public boolean hasValidHand(){
+
+        if(this.score>0 && this.score<=21){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    /**
+     * It checks if the player is bust.
+     * @return true if bust, false otherwise
+     */
+    public boolean isBust(){
+
+        if(this.score>21){
+            return true;
+        } else {
+            return false;
+        }
 
     }
 

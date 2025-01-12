@@ -11,7 +11,7 @@ import java.util.List;
 public class Player {
 
     private final String name;
-    private final int score;
+    private int score;
     private final List<Card> cardsList;
 
 
@@ -40,6 +40,7 @@ public class Player {
         cardsList.add(card1);
         cardsList.add(card2);
 
+        this.score=this.valueHand();
     }
 
     public int getNumberOfCards() {
@@ -96,6 +97,7 @@ public class Player {
 
             sum = sum + cardValue;
         }
+
         for(Card ace:acesList) {
             int cardValue = 0;
             if(sum <=10){
@@ -121,6 +123,8 @@ public class Player {
      */
     public void hitCard(Card card) {
         cardsList.add(card);
+
+        this.score=this.valueHand();
     }
 
     /**

@@ -26,6 +26,35 @@ class PlayerTest {
 
         player1.openingHand(card1,card2);
         assertEquals(2,player1.getNumberOfCards());
-
     }
+
+
+
+    @Test
+    @DisplayName("""
+            Given I have a valid hand of cards
+            When I choose to 'hit'
+            Then I receive another card
+            And my score is updated
+            """)
+    void hitCardTest(){
+        Player player1 = new Player("Fabio");
+        Card card1 = new Card(Rank.NINE, Suit.SPADE);
+        Card card2 = new Card(Rank.THREE, Suit.SPADE);
+        Card card3 = new Card(Rank.TWO, Suit.SPADE);
+
+        assertEquals(0, player1.getScore());
+
+        player1.openingHand(card1,card2);
+        assertEquals(12, player1.getScore());
+
+        player1.hitCard(card3);
+        assertEquals(14,player1.getScore());
+    }
+
+
+
+
+
+
 }

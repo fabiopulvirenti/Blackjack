@@ -57,7 +57,7 @@ public class Player {
      * It adds a new card to the list of cards in the hand and updates the score
      * @param card an instance of Card
      */
-    public void addCard(Card card){
+    public void hitCard(Card card){
         cardsList.add(card);
     }
 

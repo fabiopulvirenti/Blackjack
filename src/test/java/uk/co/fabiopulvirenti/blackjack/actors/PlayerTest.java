@@ -18,7 +18,7 @@ class PlayerTest {
         Card card2 = new Card(Rank.SIX, Suit.DIAMOND);
 
         player1.openingHand(card1, card2);
-        assertEquals(6,player1.valueHand());
+        assertEquals(16,player1.valueHand());
 
         Card card3 = new Card(Rank.FIVE, Suit.SPADE);
         player1.hitCard(card3);

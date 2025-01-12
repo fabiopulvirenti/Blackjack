@@ -5,8 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import uk.co.fabiopulvirenti.blackjack.actors.Dealer;
 import uk.co.fabiopulvirenti.blackjack.actors.Player;
-import uk.co.fabiopulvirenti.blackjack.model.Deck;
-import uk.co.fabiopulvirenti.blackjack.model.PlayerChoice;
+import uk.co.fabiopulvirenti.blackjack.model.*;
 
 import java.util.List;
 
@@ -29,6 +28,7 @@ public class ScenariosTest {
 
     @Test
     @DisplayName("""
+                Scenario 1:
                 Given I play a game of blackjack
                 When I am dealt my opening hand
                 Then I have two cards
@@ -45,6 +45,7 @@ public class ScenariosTest {
 
     @Test
     @DisplayName("""
+            Scenario 2:
             Given I have a valid hand of cards
             When I choose to 'hit'
             Then I receive another card
@@ -62,22 +63,11 @@ public class ScenariosTest {
 
         //And my score is updated
         assertTrue(score < this.player.getScore());
-
-//        Card card1 = new Card(Rank.NINE, Suit.SPADE);
-//        Card card2 = new Card(Rank.THREE, Suit.SPADE);
-//        Card card3 = new Card(Rank.TWO, Suit.SPADE);
-//
-//        assertEquals(0, player1.getScore());
-//
-//        player1.openingHand(card1,card2);
-//        assertEquals(12, player1.getScore());
-//
-//        player1.hitCard(card3);
-//        assertEquals(14,player1.getScore());
     }
 
     @Test
     @DisplayName("""
+            Scenario 3:
             Given I have a valid hand of cards
             When I choose to ‘stand’
             Then I receive no further cards
@@ -98,10 +88,57 @@ public class ScenariosTest {
     }
 
 
+    @Test
+    @DisplayName("""
+            Scenario 6:
+            Given I have a king and an ace
+            When my score is evaluated
+            Then my score is 21
+            """)
+    void kingAceHandTest(){
+        Card card1 = new Card(Rank.KING, Suit.SPADE);
+        Card card2 = new Card(Rank.ACE, Suit.HEART);
+        this.player.openingHand(card1,card2);
+
+        int score = this.player.getScore();
+        assertEquals(21, score);
+    }
+
+    @Test
+    @DisplayName("""
+            Scenario 7:
+            Given I have a king, a queen, and an ace
+            When my score is evaluated
+            Then my score is 21
+    """)
+    void kingQueenAceHandTest(){
+        Card card1 = new Card(Rank.KING, Suit.SPADE);
+        Card card2 = new Card(Rank.QUEEN, Suit.HEART);
+        Card card3 = new Card(Rank.ACE, Suit.CLUB);
+        this.player.openingHand(card1,card2);
+        this.player.hitCard(card3);
+
+        int score = this.player.getScore();
+        assertEquals(21, score);
+    }
 
 
+    @Test
+    @DisplayName("""
+            Scenario 8:
+            Given I have a nine, an ace, and another ace
+            When my score is evaluated
+            Then my score is 21
+    """)
+    void nineAceAceHandTest(){
+        Card card1 = new Card(Rank.NINE, Suit.DIAMOND);
+        Card card2 = new Card(Rank.ACE, Suit.HEART);
+        Card card3 = new Card(Rank.ACE, Suit.CLUB);
+        this.player.openingHand(card1,card2);
+        this.player.hitCard(card3);
 
-
-
+        int score = this.player.getScore();
+        assertEquals(21, score);
+    }
 
 }

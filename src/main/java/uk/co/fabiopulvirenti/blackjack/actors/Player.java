@@ -111,10 +111,6 @@ public class Player {
         return sum;
     }
 
-    public void hitOrStand() {
-
-
-    }
 
     /**
      * It adds a new card to the list of cards in the hand and updates the score
@@ -164,6 +160,5 @@ public class Player {
         }
 
     }
-
 
 }

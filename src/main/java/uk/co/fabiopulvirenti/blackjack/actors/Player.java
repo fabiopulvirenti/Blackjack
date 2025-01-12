@@ -40,6 +40,10 @@ public class Player {
 
     }
 
+    public int getNumberOfCards(){
+        return cardsList.size();
+    }
+
     public int valueHand(){
         return 0;
     }

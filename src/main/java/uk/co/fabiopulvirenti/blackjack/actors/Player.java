@@ -53,9 +53,13 @@ public class Player {
     public int valueHand() {
 
         int sum = 0;
+        List<Card> acesList= new ArrayList<>();
         for (Card card : cardsList) {
             int cardValue = 0;
             switch (card.getRank()) {
+                case ACE:
+                    acesList.add(card);
+                    break;
                 case TWO:
                     cardValue = 2;
                     break;
@@ -89,9 +93,18 @@ public class Player {
                     cardValue = 10;
                     break;
             }
+
             sum = sum + cardValue;
         }
-
+        for(Card ace:acesList) {
+            int cardValue = 0;
+            if(sum <=10){
+                cardValue=11;
+            } else {
+                cardValue=1;
+            }
+            sum = sum + cardValue;
+        }
 
         return sum;
     }

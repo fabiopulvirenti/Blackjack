@@ -28,6 +28,10 @@ public class Player {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
 
     /**
      * It adds the two initial cards of the hand.
@@ -160,5 +164,15 @@ public class Player {
         }
 
     }
+
+    public String displayCards(){
+        StringBuilder cardListStr= new StringBuilder();
+        for(Card card : cardsList) {
+            cardListStr.append(card).append(", ");
+        }
+        return cardListStr.toString();
+    }
+
+
 
 }

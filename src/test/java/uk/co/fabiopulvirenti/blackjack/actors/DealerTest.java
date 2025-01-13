@@ -23,9 +23,8 @@ public class DealerTest {
     }
 
     @Test
-    @DisplayName("")
-    void dealOpenHandTest() {
-
+    @DisplayName("Test DealOpenHand with a valid list of players")
+    void dealOpenHand_ValidListTest() {
         Player player1=new Player("Fabio");
         Player player2=new Player("Davide");
         Player player3=new Player("Thomas");
@@ -37,12 +36,35 @@ public class DealerTest {
 
         assertEquals(52, deck.getCardCount());
 
-
         dealer.dealOpenHand(listOfPlayers);
         assertEquals(2, player1.getNumberOfCards());
         assertEquals(2, player2.getNumberOfCards());
         assertEquals(2, player3.getNumberOfCards());
         assertEquals(46, deck.getCardCount());
+    }
+
+    @Test
+    @DisplayName("Test DealOpenHand with an empty list of players")
+    void dealOpenHand_EmptyListTest() {
+        List<Player>listOfPlayers = List.of();
+        assertEquals(52, deck.getCardCount());
+
+        dealer.dealOpenHand(listOfPlayers);
+        assertEquals(52, deck.getCardCount());
+    }
+
+    @Test
+    @DisplayName("Test DealOpenHand with a null list of players")
+    void dealOpenHand_NullListTest() {
+        assertEquals(52, deck.getCardCount());
+
+        try {
+            dealer.dealOpenHand(null);
+        } catch (IllegalArgumentException e){
+            assertEquals("Player List cannot be null.", e.getMessage());
+        }
+
+        assertEquals(52, deck.getCardCount());
     }
 
 

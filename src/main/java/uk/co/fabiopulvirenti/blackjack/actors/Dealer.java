@@ -25,6 +25,10 @@ public class Dealer {
      * @param playerList
      */
     public void dealOpenHand(List<Player> playerList){
+
+        if(playerList==null) {
+            throw new IllegalArgumentException("Player List cannot be null.");
+        }
         this.playersScore.clear();// it empties the map when a new hand starts
 
         for(Player player : playerList){

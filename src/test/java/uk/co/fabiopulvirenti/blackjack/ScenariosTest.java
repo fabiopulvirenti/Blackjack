@@ -90,6 +90,55 @@ public class ScenariosTest {
 
     @Test
     @DisplayName("""
+            Scenario 4:
+            Given my score is updated or evaluated
+            When it is 21 or less
+            Then I have a valid hand
+            """)
+
+    void validHandScore21OrLessTest(){
+        this.dealer.dealOpenHand(List.of(this.player));
+        assertEquals(2, this.player.getNumberOfCards());
+
+        dealer.evaluatePlayer(this.player);
+        // At this stage the score is always 21 or less
+
+        assertTrue(this.player.hasValidHand());
+
+    }
+
+
+
+    @Test
+    @DisplayName("""
+            Scenario 5:
+            Given my score is updated
+            When it is 22 or more\s
+            Then I am ‘bust’ and do not have a valid hand
+            """)
+   void scoreUpdated22OrMoreTest(){
+        assertEquals(0, this.player.getNumberOfCards());
+        this.dealer.dealOpenHand(List.of(this.player));
+        assertEquals(2, this.player.getNumberOfCards());
+        Card card = new Card(Rank.JACK, Suit.SPADE);
+        this.player.hitCard(card);
+        assertEquals(3, this.player.getNumberOfCards());
+        int score = this.player.getScore();
+
+        if(score<22){
+            Card card1 = new Card(Rank.TEN, Suit.SPADE);
+            this.player.hitCard(card1);
+            assertEquals(4, this.player.getNumberOfCards());
+            // now for sure the score is greater than 21
+        }
+        assertTrue(this.player.getScore()>21);
+        assertTrue(this.player.isBust());
+        assertFalse(this.player.hasValidHand());
+    }
+
+
+    @Test
+    @DisplayName("""
             Scenario 6:
             Given I have a king and an ace
             When my score is evaluated

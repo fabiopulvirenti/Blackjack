@@ -47,11 +47,19 @@ public class Dealer {
             Card card = deck.getCard();
             player.hitCard(card);
         } else if (playerChoice==PlayerChoice.STAND){
-            int score = player.getScore();
-            playersScore.put(player,score);
+            evaluatePlayer(player);
         }
 
     }
+
+    public int evaluatePlayer(Player player){
+        int score = player.getScore();
+        playersScore.put(player,score);
+
+        return score;
+    }
+
+
 
     /**
      *
@@ -61,6 +69,9 @@ public class Dealer {
     public boolean isPlayerEvaluated(Player player){
         return playersScore.containsKey(player);
     }
+
+
+
 
 
 

@@ -169,10 +169,13 @@ public class Player {
     }
 
     public String displayCards() {
-        StringBuilder cardListStr = new StringBuilder();
+        StringBuilder cardListStr = new StringBuilder("<");
         for (Card card : cardsList) {
             cardListStr.append(card).append(", ");
         }
+
+        cardListStr.delete(cardListStr.length() - 2, cardListStr.length()); // remove the extra comma and space
+        cardListStr.append(">");
         return cardListStr.toString();
     }
 

@@ -10,7 +10,11 @@ public class Main {
 
     public static void main(String[] args) {
 
+        startGame();
+    }
 
+
+    public static void startGame(){
         Player player1 = new Player("Fabio");
         Player player2 = new Player("Davide");
         Player player3 = new Player("Thomas");
@@ -29,7 +33,6 @@ public class Main {
             String cards = player.displayCards();
             System.out.println(player.getName() + ": " + cards);
         }
-
     }
 
 

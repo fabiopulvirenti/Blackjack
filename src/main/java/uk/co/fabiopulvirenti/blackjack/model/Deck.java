@@ -29,6 +29,7 @@ public class Deck {
 
     /**
      * It gets the first card on top of the deck and remove it from the deck.
+     *
      * @return Card
      */
     public Card getCard() {
@@ -37,6 +38,7 @@ public class Deck {
 
     /**
      * It gets the number of cards currently in the deck.
+     *
      * @return an integer representing the number of cards
      */
     public int getCardCount() {
@@ -45,6 +47,7 @@ public class Deck {
 
     /**
      * It checks if the deck has cards left.
+     *
      * @return true if the deck is empty, false otherwise
      */
     public boolean isEmpty() {

@@ -175,7 +175,7 @@ class PlayerTest {
 
     @Test
     @DisplayName("Test Value Hand scenarios")
-    public void valueHandTest(){
+    void valueHandTest(){
         Player player = new Player("Fabio");
 
         assertEquals(0, player.valueHand());
@@ -199,7 +199,7 @@ class PlayerTest {
 
     @Test
     @DisplayName("Test Value Hand scenario 2")
-    public void valueHand_Multiple_AcesTest(){
+    void valueHand_Multiple_AcesTest(){
         Player player = new Player("Fabio");
 
         assertEquals(0, player.valueHand());
@@ -217,10 +217,9 @@ class PlayerTest {
         assertEquals(14, player.valueHand());
     }
 
-
     @Test
     @DisplayName("Test Value Hand Only Aces")
-    public void valueHand_Only_AcesTest(){
+    void valueHand_Only_AcesTest(){
         Player player = new Player("Fabio");
 
         assertEquals(0, player.valueHand());
@@ -242,5 +241,59 @@ class PlayerTest {
         assertEquals(14, player.valueHand());
     }
 
+    @Test
+    @DisplayName("Get the name of the Player")
+    void getNameTest(){
+        Player player = new Player("Fabio");
+        Player player1 = new Player("");
+
+        assertEquals("Fabio", player.getName());
+        assertEquals("", player1.getName());
+    }
+
+
+    @Test
+    @DisplayName("Test Number of Cards during Player's hand")
+    void getNumberOfCardsTest(){
+        Player player = new Player("Fabio");
+
+        assertEquals(0, player.getNumberOfCards());
+
+        Card card1 = new Card(Rank.ACE, Suit.HEART);
+        Card card2 = new Card(Rank.ACE, Suit.DIAMOND);
+        player.openingHand(card1, card2);
+        assertEquals(2, player.getNumberOfCards());
+
+        Card card3 = new Card(Rank.ACE, Suit.SPADE);
+        player.hitCard(card3);
+        assertEquals(3, player.getNumberOfCards());
+
+        Card card4 = new Card(Rank.ACE, Suit.CLUB);
+        player.hitCard(card4);
+        assertEquals(4, player.getNumberOfCards());
+    }
+
+    @Test
+    @DisplayName("Display Cards in Hand")
+    void displayCardsTest() {
+
+        Player player = new Player("Fabio");
+
+        assertEquals("<>", player.displayCards());
+
+        Card card1 = new Card(Rank.ACE, Suit.HEART);
+        Card card2 = new Card(Rank.ACE, Suit.DIAMOND);
+        player.openingHand(card1, card2);
+        assertEquals("<ACE HEART, ACE DIAMOND>", player.displayCards());
+
+        Card card3 = new Card(Rank.ACE, Suit.SPADE);
+        player.hitCard(card3);
+        assertEquals("<ACE HEART, ACE DIAMOND, ACE SPADE>", player.displayCards());
+
+        Card card4 = new Card(Rank.TWO, Suit.CLUB);
+        player.hitCard(card4);
+        assertEquals("<ACE HEART, ACE DIAMOND, ACE SPADE, TWO CLUB>", player.displayCards());
+
+    }
 
 }

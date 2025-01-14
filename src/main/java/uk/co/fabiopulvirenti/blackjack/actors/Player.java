@@ -25,9 +25,13 @@ public class Player {
         this.name = name;
         this.score = 0;
         this.cardsList = new ArrayList<>();
-
     }
 
+    /**
+     * It returns the name of the Player passed into the constructor
+     *
+     * @return a string with the name of the player
+     */
     public String getName() {
         return name;
     }
@@ -47,6 +51,10 @@ public class Player {
         this.score = this.valueHand();
     }
 
+    /**
+     * It returns the number of cards in the player's hand
+     * @return an integer representing the number of cards
+     */
     public int getNumberOfCards() {
         return cardsList.size();
     }
@@ -191,6 +199,10 @@ public class Player {
      * @return a string that represents the cards in hand
      */
     public String displayCards() {
+        if(cardsList.isEmpty()) {
+            return "<>";
+        }
+
         StringBuilder cardListStr = new StringBuilder("<");
         for (Card card : cardsList) {
             cardListStr.append(card).append(", ");

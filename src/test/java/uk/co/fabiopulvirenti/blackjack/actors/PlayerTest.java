@@ -140,7 +140,7 @@ class PlayerTest {
 
 
     @Test
-    @DisplayName("")
+    @DisplayName("Player is bust after reaching 22 or more")
     void isBustTest() {
 
         Player player = new Player("Fabio");
@@ -171,6 +171,75 @@ class PlayerTest {
 
         assertTrue(player.isBust());
 
+    }
+
+    @Test
+    @DisplayName("Test Value Hand scenarios")
+    public void valueHandTest(){
+        Player player = new Player("Fabio");
+
+        assertEquals(0, player.valueHand());
+
+        Card card1 = new Card(Rank.ACE, Suit.HEART);
+        player.hitCard(card1);
+        assertEquals(11, player.valueHand());
+
+        Card card2 = new Card(Rank.ACE, Suit.DIAMOND);
+        player.hitCard(card2);
+        assertEquals(12, player.valueHand());
+
+        Card card3 = new Card(Rank.QUEEN, Suit.SPADE);
+        player.hitCard(card3);
+        assertEquals(12, player.valueHand());
+
+        Card card4 = new Card(Rank.KING, Suit.HEART);
+        player.hitCard(card4);
+        assertEquals(22, player.valueHand());
+    }
+
+    @Test
+    @DisplayName("Test Value Hand scenario 2")
+    public void valueHand_Multiple_AcesTest(){
+        Player player = new Player("Fabio");
+
+        assertEquals(0, player.valueHand());
+
+        Card card1 = new Card(Rank.ACE, Suit.HEART);
+        player.hitCard(card1);
+        assertEquals(11, player.valueHand());
+
+        Card card2 = new Card(Rank.ACE, Suit.DIAMOND);
+        player.hitCard(card2);
+        assertEquals(12, player.valueHand());
+
+        Card card3 = new Card(Rank.TWO, Suit.SPADE);
+        player.hitCard(card3);
+        assertEquals(14, player.valueHand());
+    }
+
+
+    @Test
+    @DisplayName("Test Value Hand Only Aces")
+    public void valueHand_Only_AcesTest(){
+        Player player = new Player("Fabio");
+
+        assertEquals(0, player.valueHand());
+
+        Card card1 = new Card(Rank.ACE, Suit.HEART);
+        player.hitCard(card1);
+        assertEquals(11, player.valueHand());
+
+        Card card2 = new Card(Rank.ACE, Suit.DIAMOND);
+        player.hitCard(card2);
+        assertEquals(12, player.valueHand());
+
+        Card card3 = new Card(Rank.ACE, Suit.SPADE);
+        player.hitCard(card3);
+        assertEquals(13, player.valueHand());
+
+        Card card4 = new Card(Rank.ACE, Suit.CLUB);
+        player.hitCard(card4);
+        assertEquals(14, player.valueHand());
     }
 
 

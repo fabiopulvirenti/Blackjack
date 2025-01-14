@@ -14,7 +14,7 @@ public class Main {
     }
 
 
-    public static void startGame(){
+    public static void startGame() {
         Player player1 = new Player("Fabio");
         Player player2 = new Player("Davide");
         Player player3 = new Player("Thomas");

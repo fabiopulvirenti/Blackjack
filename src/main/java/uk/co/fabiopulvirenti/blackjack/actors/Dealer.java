@@ -45,7 +45,7 @@ public class Dealer {
      * It checks the choice of the Player and either gives a card to the player if it has chosen 'Hit' or evaluates its
      * score it has chosen 'Stand'
      *
-     * @param player Player that makes the choice
+     * @param player       Player that makes the choice
      * @param playerChoice the choice to evaluate
      */
     public void valueChoiceOfPlayer(Player player, PlayerChoice playerChoice) {

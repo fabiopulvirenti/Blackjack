@@ -52,7 +52,7 @@ public class Player {
     }
 
     /**
-     * It calculates the value of the hand
+     * It calculates the value of the hand according to the rules of Black Jack
      *
      * @return an integer of the current value of the hand
      */
@@ -103,14 +103,31 @@ public class Player {
             sum = sum + cardValue;
         }
 
-        for (Card ace : acesList) {
-            int cardValue = 0;
+
+        if (acesList.size() == 1) {
             if (sum <= 10) {
-                cardValue = 11;
+                sum = sum + 11;
             } else {
-                cardValue = 1;
+                sum = sum + 1;
             }
-            sum = sum + cardValue;
+        } else if (acesList.size() == 2) {
+            if (sum <= 9) {
+                sum = sum + 11 + 1;
+            } else {
+                sum = sum + 1 + 1;
+            }
+        } else if (acesList.size() == 3) {
+            if (sum <= 8) {
+                sum = sum + 11 + 1 + 1;
+            } else {
+                sum = sum + 1 + 1 + 1;
+            }
+        } else if (acesList.size() == 4) {
+            if (sum <= 7) {
+                sum = sum + 11 + 1 + 1 + 1;
+            } else {
+                sum = sum + 1 + 1 + 1 + 1;
+            }
         }
 
         return sum;
@@ -168,6 +185,11 @@ public class Player {
 
     }
 
+    /**
+     * It shows the cards on the player's hand
+     *
+     * @return a string that represents the cards in hand
+     */
     public String displayCards() {
         StringBuilder cardListStr = new StringBuilder("<");
         for (Card card : cardsList) {

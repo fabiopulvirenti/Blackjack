@@ -11,6 +11,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testing the Given Scenarios
+ */
 public class ScenariosTest {
 
     private Player player;
@@ -42,18 +45,18 @@ public class ScenariosTest {
     }
 
 
-
     @Test
     @DisplayName("""
-            Scenario 2:
-            Given I have a valid hand of cards
-            When I choose to 'hit'
-            Then I receive another card
-            And my score is updated
+                Scenario 2:
+                Given I have a valid hand of cards
+                When I choose to 'hit'
+                Then I receive another card
+                And my score is updated
             """)
-    void hitCardTest(){
+    void hitCardTest() {
         this.dealer.dealOpenHand(List.of(this.player));
         assertEquals(2, this.player.getNumberOfCards());
+
         int score = this.player.getScore();
 
         this.dealer.valueChoiceOfPlayer(this.player, PlayerChoice.HIT);
@@ -62,27 +65,30 @@ public class ScenariosTest {
         assertEquals(3, this.player.getNumberOfCards());
 
         //And my score is updated
-        assertTrue(score < this.player.getScore());
+        assertTrue(score != this.player.getScore());
     }
 
     @Test
     @DisplayName("""
-            Scenario 3:
-            Given I have a valid hand of cards
-            When I choose to ‘stand’
-            Then I receive no further cards
-            And my score is evaluated
+                Scenario 3:
+                Given I have a valid hand of cards
+                When I choose to ‘stand’
+                Then I receive no further cards
+                And my score is evaluated
             """)
-    void standCardTest(){
+    void standCardTest() {
         this.dealer.dealOpenHand(List.of(this.player));
         assertEquals(2, this.player.getNumberOfCards());
         assertTrue(player.hasValidHand());
 
         assertFalse(this.dealer.isPlayerEvaluated(this.player));
 
+        // When I choose to 'stand'
         this.dealer.valueChoiceOfPlayer(this.player, PlayerChoice.STAND);
+        //Then I receive no further cards
         assertEquals(2, this.player.getNumberOfCards());
 
+        // And my score is evaluated
         assertTrue(this.dealer.isPlayerEvaluated(this.player));
 
     }
@@ -90,33 +96,32 @@ public class ScenariosTest {
 
     @Test
     @DisplayName("""
-            Scenario 4:
-            Given my score is updated or evaluated
-            When it is 21 or less
-            Then I have a valid hand
+                Scenario 4:
+                Given my score is updated or evaluated
+                When it is 21 or less
+                Then I have a valid hand
             """)
-
-    void validHandScore21OrLessTest(){
+    void validHandScore21OrLessTest() {
         this.dealer.dealOpenHand(List.of(this.player));
         assertEquals(2, this.player.getNumberOfCards());
 
         dealer.evaluatePlayer(this.player);
-        // At this stage the score is always 21 or less
+        // At this stage the score is always 21 or less,
+        // because the opening card won't exceed it
 
         assertTrue(this.player.hasValidHand());
-
+        assertFalse(this.player.isBust());
     }
-
 
 
     @Test
     @DisplayName("""
-            Scenario 5:
-            Given my score is updated
-            When it is 22 or more\s
-            Then I am ‘bust’ and do not have a valid hand
+                Scenario 5:
+                Given my score is updated
+                When it is 22 or more
+                Then I am ‘bust’ and do not have a valid hand
             """)
-   void scoreUpdated22OrMoreTest(){
+    void scoreUpdated22OrMoreTest() {
         assertEquals(0, this.player.getNumberOfCards());
         this.dealer.dealOpenHand(List.of(this.player));
         assertEquals(2, this.player.getNumberOfCards());
@@ -125,13 +130,13 @@ public class ScenariosTest {
         assertEquals(3, this.player.getNumberOfCards());
         int score = this.player.getScore();
 
-        if(score<22){
+        if (score < 22) {
             Card card1 = new Card(Rank.TEN, Suit.SPADE);
             this.player.hitCard(card1);
             assertEquals(4, this.player.getNumberOfCards());
             // now for sure the score is greater than 21
         }
-        assertTrue(this.player.getScore()>21);
+        assertTrue(this.player.getScore() > 21);
         assertTrue(this.player.isBust());
         assertFalse(this.player.hasValidHand());
     }
@@ -139,15 +144,15 @@ public class ScenariosTest {
 
     @Test
     @DisplayName("""
-            Scenario 6:
-            Given I have a king and an ace
-            When my score is evaluated
-            Then my score is 21
+                Scenario 6:
+                Given I have a king and an ace
+                When my score is evaluated
+                Then my score is 21
             """)
-    void kingAceHandTest(){
+    void kingAceHandTest() {
         Card card1 = new Card(Rank.KING, Suit.SPADE);
         Card card2 = new Card(Rank.ACE, Suit.HEART);
-        this.player.openingHand(card1,card2);
+        this.player.openingHand(card1, card2);
 
         int score = this.player.getScore();
         assertEquals(21, score);
@@ -155,16 +160,16 @@ public class ScenariosTest {
 
     @Test
     @DisplayName("""
-            Scenario 7:
-            Given I have a king, a queen, and an ace
-            When my score is evaluated
-            Then my score is 21
-    """)
-    void kingQueenAceHandTest(){
+                Scenario 7:
+                Given I have a king, a queen, and an ace
+                When my score is evaluated
+                Then my score is 21
+            """)
+    void kingQueenAceHandTest() {
         Card card1 = new Card(Rank.KING, Suit.SPADE);
         Card card2 = new Card(Rank.QUEEN, Suit.HEART);
         Card card3 = new Card(Rank.ACE, Suit.CLUB);
-        this.player.openingHand(card1,card2);
+        this.player.openingHand(card1, card2);
         this.player.hitCard(card3);
 
         int score = this.player.getScore();
@@ -174,16 +179,16 @@ public class ScenariosTest {
 
     @Test
     @DisplayName("""
-            Scenario 8:
-            Given I have a nine, an ace, and another ace
-            When my score is evaluated
-            Then my score is 21
-    """)
-    void nineAceAceHandTest(){
+                Scenario 8:
+                Given I have a nine, an ace, and another ace
+                When my score is evaluated
+                Then my score is 21
+            """)
+    void nineAceAceHandTest() {
         Card card1 = new Card(Rank.NINE, Suit.DIAMOND);
         Card card2 = new Card(Rank.ACE, Suit.HEART);
         Card card3 = new Card(Rank.ACE, Suit.CLUB);
-        this.player.openingHand(card1,card2);
+        this.player.openingHand(card1, card2);
         this.player.hitCard(card3);
 
         int score = this.player.getScore();

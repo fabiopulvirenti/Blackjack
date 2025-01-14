@@ -11,8 +11,8 @@ import java.util.List;
 public class Player {
 
     private final String name;
-    private int score;
     private final List<Card> cardsList;
+    private int score;
 
 
     /**
@@ -44,7 +44,7 @@ public class Player {
         cardsList.add(card1);
         cardsList.add(card2);
 
-        this.score=this.valueHand();
+        this.score = this.valueHand();
     }
 
     public int getNumberOfCards() {
@@ -53,12 +53,13 @@ public class Player {
 
     /**
      * It calculates the value of the hand
+     *
      * @return an integer of the current value of the hand
      */
     public int valueHand() {
 
         int sum = 0;
-        List<Card> acesList= new ArrayList<>();
+        List<Card> acesList = new ArrayList<>();
         for (Card card : cardsList) {
             int cardValue = 0;
             switch (card.getRank()) {
@@ -102,12 +103,12 @@ public class Player {
             sum = sum + cardValue;
         }
 
-        for(Card ace:acesList) {
+        for (Card ace : acesList) {
             int cardValue = 0;
-            if(sum <=10){
-                cardValue=11;
+            if (sum <= 10) {
+                cardValue = 11;
             } else {
-                cardValue=1;
+                cardValue = 1;
             }
             sum = sum + cardValue;
         }
@@ -140,24 +141,26 @@ public class Player {
 
     /**
      * It checks if the current hand is valid.
+     *
      * @return true if valid, false otherwise
      */
-    public boolean hasValidHand(){
+    public boolean hasValidHand() {
 
-        if(this.score>0 && this.score<=21){
+        if (this.score > 0 && this.score <= 21) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
     /**
      * It checks if the player is bust.
+     *
      * @return true if bust, false otherwise
      */
-    public boolean isBust(){
+    public boolean isBust() {
 
-        if(this.score>21){
+        if (this.score > 21) {
             return true;
         } else {
             return false;
@@ -165,14 +168,13 @@ public class Player {
 
     }
 
-    public String displayCards(){
-        StringBuilder cardListStr= new StringBuilder();
-        for(Card card : cardsList) {
+    public String displayCards() {
+        StringBuilder cardListStr = new StringBuilder();
+        for (Card card : cardsList) {
             cardListStr.append(card).append(", ");
         }
         return cardListStr.toString();
     }
-
 
 
 }
